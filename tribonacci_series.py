@@ -1,22 +1,20 @@
 class Solution:
     def tribonacci(self, n: int) -> int:
+        lst={}
+        return self.rec(n,lst)
+    def rec(self,n: int,lst: dict) -> int:
+        if n in lst:
+            return lst[n]
         if(n==0):
+            lst[0]=0
             return 0
-        elif(n==1):
-            return 1
-        elif(n==2):
+        elif n==1 or n==2:
+            lst[1]=1
+            lst[2]=1
             return 1
         else:
-            sum0=0
-            sum1=1
-            sum2=1
-            sum=sum0+sum1+sum2
-            for i in range(3,n):
-                sum0=sum1
-                sum1=sum2
-                sum2=sum
-                sum=sum0+sum1+sum2
-            return sum
+            lst[n]=self.rec(n-1,lst)+self.rec(n-2,lst)+self.rec(n-3,lst)
+            return lst[n]
 
 def main():
     while True:
